@@ -21,7 +21,7 @@ Opening and operating a restaurant in NYC involves significant expenses and risk
    - [https://catalog.data.gov/dataset/nypd-complaint-data-historic](https://catalog.data.gov/dataset/nypd-complaint-data-historic)
 
 3. **PLUTO (Primary Land Use Tax Lot Output)** - Property tax records and building characteristics
-   - [https://data.cityofnewyork.us/City-Government/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks/about_data](https://data.cityofnewyork.us/City-Government/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks/about_data)
+   - [https://data.cityofnewyork.us/City-Government/Prismary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks/about_data](https://data.cityofnewyork.us/City-Government/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks/about_data)
 
 ## Methodology
 
