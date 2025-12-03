@@ -15,7 +15,7 @@
 - `requirements.txt` with all dependencies
 - Organized folder structure (`data/`, `notebooks/`, `src/`, `sql/`)
 
-### Step 2: Data Acquisition ✓
+### Step 2: Data Acquisition 
 - Download Yelp Open Dataset (JSON format)
 - Download NYPD Complaint Data Historic (CSV)
 - Download PLUTO dataset (CSV)
