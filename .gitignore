@@ -3,7 +3,7 @@ venv/
 
 # Data files
 data/raw/
-# data/processed/ - removed so cleaned data can be shared via Git
+data/processed/
 
 # Python
 *.pyc
