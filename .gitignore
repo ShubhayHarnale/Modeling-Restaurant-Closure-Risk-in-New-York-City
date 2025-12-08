@@ -3,7 +3,7 @@ venv/
 
 # Data files
 data/raw/
-# data/processed/ - removed so cleaned data can be shared via Git
+data/processed/
 
 # Python
 *.pyc
@@ -28,3 +28,6 @@ models/*.joblib
 
 # Logs
 *.log
+
+# Processed data files (too large for GitHub, regenerate by running notebooks)
+data/processed/*.csv
