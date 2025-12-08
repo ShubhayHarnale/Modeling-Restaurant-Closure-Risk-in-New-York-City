@@ -31,15 +31,15 @@
 
 ### Day 1: Data Integration & Feature Engineering
 
-#### Task 1: Complete Data Cleaning 
-- Finish NYPD data cleaning notebook
-- Finish PLUTO data cleaning notebook
-- Save all cleaned datasets to `data/processed/`
+#### Task 1: Complete Data Cleaning ✅ DONE
+- ✅ Finish NYPD data cleaning notebook 
+- ✅ Finish PLUTO data cleaning notebook
+- ✅ Save all cleaned datasets
 
 **Deliverables:**
-- `nypd_complaints_nyc_clean.csv`
-- `pluto_nyc_clean.csv`
-- All three cleaned datasets ready
+- ✅ `nypd_complaints_clean.csv`
+- ✅ `pluto_nyc_clean.csv`
+- ✅ `yelp_restaurants_nyc.csv`
 
 #### Task 2: Create Master Dataset
 **In new notebook: `04_data_integration.ipynb`**
@@ -128,9 +128,9 @@
 ## Expected Final Deliverables
 
 1. **Notebooks** (6 total):
-   - `yelp_exploration.ipynb` ✓
-   - `nypd_exploration.ipynb` (complete cleaning)
-   - `pluto_exploration.ipynb` (complete cleaning)
+   - `yelp_exploration.ipynb` ✅
+   - `nypd_exploration.ipynb` ✅
+   - `pluto_exploration.ipynb` ✅
    - `data_integration.ipynb` (NEW)
    - `feature_engineering.ipynb` (NEW)
    - `modeling_and_results.ipynb` (NEW)
