@@ -1,6 +1,6 @@
 # Project Implementation Plan - Final Project
 
-**Project:** Modeling Restaurant Closure Risk in New York City  
+**Project:** Predicting Restaurant Inspection Scores in New York City  
 **Authors:** Nicholas Martino (nsm143), Shubhay Harnale (sh1615)  
 **Timeline:** 2 Days to Completion
 
@@ -14,16 +14,16 @@
 - Installed core dependencies
 
 ### Step 2: Data Acquisition ✓
-- Downloaded Yelp Open Dataset (JSON format)
-- Downloaded NYPD Complaint Data Historic (CSV)
-- Downloaded PLUTO dataset (CSV)
+- ✅ Downloaded DOHMH NYC Restaurant Inspection Results
+- ✅ Downloaded NYPD Complaint Data Historic (CSV)
+- ✅ Downloaded PLUTO dataset (CSV)
+- ❌ Yelp data not used (no NYC coverage)
 
 ### Step 3: Initial Data Exploration ✓
 - Created exploratory Jupyter notebooks for each dataset
-- Filtered Yelp data to NYC restaurants only
-- Analyzed closure rates, ratings, and business characteristics
-- Explored crime data structure and temporal patterns
-- Examined property tax data structure
+- Cleaned DOHMH data to restaurant-level table (26,572 restaurants)
+- Cleaned NYPD data (9.49M crime records)
+- Cleaned PLUTO data (857K property records)
 
 ---
 
@@ -32,59 +32,56 @@
 ### Day 1: Data Integration & Feature Engineering
 
 #### Task 1: Complete Data Cleaning ✅ DONE
-- ✅ Finish NYPD data cleaning notebook 
-- ✅ Finish PLUTO data cleaning notebook
-- ✅ Save all cleaned datasets
+- ✅ Finish NYPD data cleaning notebook (9,491,467 crime records)
+- ✅ Finish PLUTO data cleaning notebook (857,025 property records)
+- ✅ Finish DOHMH data cleaning notebook (26,572 restaurants)
 
 **Deliverables:**
 - ✅ `nypd_complaints_clean.csv`
 - ✅ `pluto_nyc_clean.csv`
-- ✅ `yelp_restaurants_nyc.csv`
+- ✅ `dohmh_restaurants_clean.csv`
 
 #### Task 2: Create Master Dataset
-**In new notebook: `04_data_integration.ipynb`**
+**In notebook: `data_integration.ipynb`**
 - Load all three cleaned datasets
-- Create simple geospatial features using pandas:
-  - Count crimes within 0.01° (~1km) of each restaurant
-  - Match restaurants to PLUTO records by nearest coordinates
+- Create geospatial features using pandas:
+  - Count crimes within ~500m of each restaurant
+  - Match restaurants to nearest PLUTO property records
 - Merge all data into single master dataset
 
 **Deliverables:**
 - `master_restaurant_dataset.csv` with all features combined
-- Simple feature set: ratings, review_count, crime_nearby, property_value, building_age
+- Feature set: inspection scores, crime counts, property values, building age
 
 ---
 
 ### Day 2: Modeling & Demo Notebook
 
 #### Task 3: Feature Engineering 
-**In notebook: `05_feature_engineering.ipynb`**
-- Create basic features from merged data:
-  - Restaurant age (if dates available)
-  - Price tier encoding
-  - Top 5-10 cuisine categories as binary flags
-  - Crime density bins (low/medium/high)
-  - Simple rating features (stars, review count bins)
+**In notebook: `feature_engineering.ipynb`**
+- Create features from merged data:
+  - Crime density (total crimes nearby)
+  - Crime by type (felonies, misdemeanors, violations)
+  - Property value (avg assessed value nearby)
+  - Building age (avg year built nearby)
+  - Cuisine category encoding
 - Handle missing values (simple imputation)
-- Train/test split (by date if possible, otherwise random 80/20)
+- Train/test split (80/20)
 
 **Deliverables:**
 - Final feature matrix ready for modeling
 - Clear documentation of features
 
 #### Task 4: Build Predictive Model 
-**In notebook: `06_modeling_and_results.ipynb`**
-- Train 2-3 simple models:
-  - Logistic Regression (baseline)
-  - Random Forest
-  - Gradient Boosting (XGBoost or LightGBM)
-- Evaluate with accuracy, precision, recall, F1, ROC-AUC
+**In notebook: `modeling_and_results.ipynb`**
+- **Option A - Regression:** Predict inspection score (0-100+)
+  - Linear Regression, Random Forest Regressor, XGBoost
+  - Evaluate with RMSE, MAE, R²
+- **Option B - Classification:** Predict grade (A vs B vs C)
+  - Logistic Regression, Random Forest, XGBoost
+  - Evaluate with accuracy, precision, recall, F1
 - Feature importance analysis
-- Create visualizations:
-  - ROC curves
-  - Feature importance bar chart
-  - Confusion matrix
-  - Predicted risk distribution
+- Create visualizations
 
 **Deliverables:**
 - Trained models saved in `models/` folder
@@ -94,12 +91,12 @@
 #### Task 5: Demo Preparation 
 **Create: `DEMO_NOTEBOOK.ipynb`**
 - Clean, executive-summary style notebook showing:
-  1. Problem statement (2 cells)
-  2. Data overview (3-4 cells with key statistics)
-  3. Sample integrated data (show restaurant + crime + property features)
-  4. Model results (accuracy, ROC curve, feature importance)
-  5. Example predictions (show 5-10 restaurants with risk scores)
-  6. Key insights and findings (2-3 takeaways)
+  1. Problem statement & research question
+  2. Data overview (3 sources, key statistics)
+  3. Sample integrated data (restaurant + crime + property features)
+  4. Model results (performance metrics, feature importance)
+  5. Example predictions (restaurants with predicted scores)
+  6. Key insights (what factors influence inspection scores?)
 
 **Deliverables:**
 - Professional demo notebook with clear narrative
@@ -108,27 +105,20 @@
 
 ---
 
-## Simplified Scope for 2-Day Timeline
+## Data Sources
 
-**What We're DOING:**
-- ✅ Using pandas for all data processing (no database needed)
-- ✅ Simple geospatial joins using coordinate proximity
-- ✅ Basic feature engineering with existing data
-- ✅ Standard ML models (sklearn, xgboost)
-- ✅ Clear visualizations and interpretability
+| Dataset | Source | Records | Key Fields |
+|---------|--------|---------|------------|
+| **DOHMH Inspections** | [NYC Open Data](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j) | 26,572 restaurants | scores, grades, lat/long |
+| **NYPD Complaints** | [NYC Open Data](https://catalog.data.gov/dataset/nypd-complaint-data-historic) | 9.49M records | crime type, severity, lat/long |
+| **PLUTO** | [NYC Open Data](https://data.cityofnewyork.us/City-Government/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks) | 857K records | building age, value, land use |
 
-**What We're SKIPPING:**
-- ❌ PostgreSQL database setup (too time-consuming)
-- ❌ Complex geospatial queries with PostGIS
-- ❌ Advanced feature engineering (time series analysis, NLP on reviews)
-- ❌ Deep learning models
-- ❌ Extensive hyperparameter tuning
-- ❌ Production deployment
+---
 
 ## Expected Final Deliverables
 
 1. **Notebooks** (6 total):
-   - `yelp_exploration.ipynb` ✅
+   - `dohmh_exploration.ipynb` ✅
    - `nypd_exploration.ipynb` ✅
    - `pluto_exploration.ipynb` ✅
    - `data_integration.ipynb` (NEW)
@@ -154,8 +144,16 @@
 
 The demo should clearly show:
 1. ✅ Data from 3 sources successfully integrated
-2. ✅ Meaningful features extracted (crime, property, business characteristics)
-3. ✅ Working predictive model with reasonable performance (>70% accuracy)
-4. ✅ Clear insights about what factors predict restaurant closure
+2. ✅ Meaningful features extracted (crime density, property characteristics)
+3. ✅ Working predictive model with reasonable performance
+4. ✅ Clear insights about what neighborhood factors influence inspection scores
 5. ✅ Professional visualizations and presentation
 
+---
+
+## Research Questions to Answer
+
+1. Do restaurants in high-crime areas have worse inspection scores?
+2. Does property value/building age correlate with inspection outcomes?
+3. Are certain cuisines more likely to have lower scores?
+4. Which borough has the best/worst inspection scores on average?
