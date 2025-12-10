@@ -29,7 +29,7 @@
 
 ## 🚀 FINAL PROJECT - Remaining Work
 
-### Day 1: Data Integration & Feature Engineering
+### Day 1: Data Integration & Feature Engineering ✅ COMPLETE
 
 #### Task 1: Complete Data Cleaning ✅ DONE
 - ✅ Finish NYPD data cleaning notebook (9,491,467 crime records)
@@ -41,36 +41,36 @@
 - ✅ `pluto_nyc_clean.csv`
 - ✅ `dohmh_restaurants_clean.csv`
 
-#### Task 2: Create Master Dataset
+#### Task 2: Create Master Dataset ✅ DONE
 **In notebook: `data_integration.ipynb`**
-- Load all three cleaned datasets
-- Create geospatial features using pandas:
-  - Count crimes within ~500m of each restaurant
-  - Match restaurants to nearest PLUTO property records
-- Merge all data into single master dataset
+- ✅ Load all three cleaned datasets
+- ✅ Create geospatial features using cKDTree:
+  - ✅ Count crimes within ~500m of each restaurant
+  - ✅ Match restaurants to nearest PLUTO property records
+- ✅ Merge all data into single master dataset
 
 **Deliverables:**
-- `master_restaurant_dataset.csv` with all features combined
-- Feature set: inspection scores, crime counts, property values, building age
+- ✅ `master_restaurant_dataset.csv` with all features combined
+- ✅ Feature set: inspection scores, crime counts, property values, building age
 
 ---
 
 ### Day 2: Modeling & Demo Notebook
 
-#### Task 3: Feature Engineering 
+#### Task 3: Feature Engineering ✅ DONE
 **In notebook: `feature_engineering.ipynb`**
-- Create features from merged data:
-  - Crime density (total crimes nearby)
-  - Crime by type (felonies, misdemeanors, violations)
-  - Property value (avg assessed value nearby)
-  - Building age (avg year built nearby)
-  - Cuisine category encoding
-- Handle missing values (simple imputation)
-- Train/test split (80/20)
+- ✅ Create features from merged data:
+  - ✅ Crime density (crimes_nearby)
+  - ✅ Property value (property_assesstot)
+  - ✅ Building age (property_yearbuilt)
+  - ✅ Cuisine category encoding
+  - ✅ Borough & ZIP code encoding
+- ✅ Handle missing values (none found after cleaning)
+- ✅ Train/test split (80/20)
 
 **Deliverables:**
-- Final feature matrix ready for modeling
-- Clear documentation of features
+- ✅ Final feature matrix ready for modeling (X_train, X_test, y_train, y_test)
+- ✅ Clear documentation of features
 
 #### Task 4: Build Predictive Model 
 **In notebook: `modeling_and_results.ipynb`**
@@ -115,31 +115,6 @@
 
 ---
 
-## Expected Final Deliverables
-
-1. **Notebooks** (6 total):
-   - `dohmh_exploration.ipynb` ✅
-   - `nypd_exploration.ipynb` ✅
-   - `pluto_exploration.ipynb` ✅
-   - `data_integration.ipynb` (NEW)
-   - `feature_engineering.ipynb` (NEW)
-   - `modeling_and_results.ipynb` (NEW)
-   - `DEMO_NOTEBOOK.ipynb` (NEW - for presentation)
-
-2. **Processed Data**:
-   - All cleaned CSVs in `data/processed/`
-   - Master dataset with all features
-
-3. **Models**:
-   - Saved model files in `models/`
-   - Performance metrics summary
-
-4. **Documentation**:
-   - Updated README with results
-   - Final report summarizing findings
-
----
-
 ## Success Criteria for Demo
 
 The demo should clearly show:
@@ -151,9 +126,4 @@ The demo should clearly show:
 
 ---
 
-## Research Questions to Answer
 
-1. Do restaurants in high-crime areas have worse inspection scores?
-2. Does property value/building age correlate with inspection outcomes?
-3. Are certain cuisines more likely to have lower scores?
-4. Which borough has the best/worst inspection scores on average?
